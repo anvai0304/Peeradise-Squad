@@ -12,10 +12,12 @@ class AuthMethods {
   Future<user_model.User> getUserDetails() async {
     User currentUser = _auth.currentUser!;
 
-    DocumentSnapshot snap = await _firestore.collection('user').doc(currentUser.uid).get();
+    DocumentSnapshot snap = await _firestore.collection('user').doc(newMethod(currentUser).uid).get();
 
     return user_model.User.fromSnap(snap);
   }
+
+  User newMethod(User currentUser) => currentUser;
 
   // Register student
   Future<String> registerStudent({
